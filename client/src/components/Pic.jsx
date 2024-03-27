@@ -4,7 +4,6 @@ import axios from 'axios';
 const Pic = () => {
   const [previewImage, setPreviewImage] = useState(null);
 
- 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -12,19 +11,26 @@ const Pic = () => {
       formData.append('image', file);
       try {
         const response = await axios.post('http://localhost:8080/api/filtre/image', formData, {
+          responseType: 'arraybuffer',  // Ensure axios treats the response as binary data
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
-        setPreviewImage(URL.createObjectURL(file)); // Display the uploaded image
-        console.log(response.data);
+
+        // Convert the array buffer to blob
+        const blob = new Blob([response.data], { type: 'image/jpeg' });
+        
+        // Create blob URL for the image data
+        const imageUrl = URL.createObjectURL(blob);
+        
+        // Set the blob URL as the preview image
+        setPreviewImage(imageUrl); 
       } catch (error) {
         console.error('Error uploading image:', error);
       }
     }
   };
 
-  
   return (
     <div className="w-full flex justify-center items-center">
       <div className="w-[680px] h-[480px] border-2 border-gray-300 border-dashed rounded-lg flex justify-center items-center overflow-hidden">
@@ -33,11 +39,11 @@ const Pic = () => {
             <img
               src={previewImage}
               className="w-[480px] h-[380px] object-cover"
-              alt="Preview"
+              alt="Black and white image"
             />
             <button
               className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-800"
-              onClick={() => setPreviewImage('')}
+              onClick={() => setPreviewImage(null)}
             >
               Import another image
             </button>
