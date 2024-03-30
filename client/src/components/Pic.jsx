@@ -58,7 +58,7 @@ const Pic = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       
-      <div className="flex-1 flex justify-center items-center">
+      <div className="m-10 flex-1 flex justify-center items-center">
         <div className="w-[680px] h-[480px] border-2 border-gray-300 border-dashed rounded-lg flex justify-center items-center overflow-hidden">
           {previewImage ? (
             <div className="flex flex-col items-center">
@@ -86,7 +86,7 @@ const Pic = () => {
           )}
         </div>
       </div>
-      <div className="flex-1 mt-[55px] border border-gray-400 bg-primary relative overflow-hidden h-screen">
+      <div className="w-[250px] flex-1 mt-[55px] border border-gray-400 bg-primary relative overflow-hidden h-screen">
         <h1 className="m-[10px] font-poppins font-semibold text-2xl text-white mb-4">Filtres</h1>
         <div className="overflow-y-auto" style={{ height: 'calc(100% - 4rem)' }}>
           <div className="flex flex-col items-end pr-4"> {/* Move the filter cards to the far right */}

@@ -4,17 +4,16 @@ import { NavBar, Filters, Pic, Param } from "./components";
 const App = () => {
  
   return (
-    <div >
-      <div >
+      <div className='overflow-hidden  h-screen   ' >
         <div className="flex">
           <Param />
           <NavBar />
-          <Pic />
+        <div className="flex-1  h-screen ">
+        <Pic />
         </div>
-       
+      </div>
       </div>
      
-    </div>
   );
 };
 
