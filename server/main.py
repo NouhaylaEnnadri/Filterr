@@ -1,59 +1,80 @@
-from flask import Flask, jsonify, request, send_file
-from flask_cors import CORS
-from PIL import Image
-import io
 import os
-import base64
+from flask import Flask, request, jsonify
+from PIL import Image, ImageFilter
+from flask_cors import CORS
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-UPLOAD_FOLDER = 'uploads'  # Directory to store processed images
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+UPLOAD_FOLDER = 'uploads'  # Specify the upload folder
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)  # Create the upload folder if it does not exist
 
-@app.route('/api/filtre/image', methods=['POST'])
-def upload_file():
+def BlackAndWhiteFilter(image):
+    # Convert the image to black and white
+    bw_image = image.convert('L')
+    return bw_image
+
+def GaussianBlurFilter(image):
+    blurred_image = image.filter(ImageFilter.GaussianBlur(radius=5))  # Adjust radius as needed
+    return blurred_image
+
+@app.route('/api/process-image', methods=['POST'])
+def process_image_route():
     if 'image' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
+        return jsonify({'error': 'No image provided'}), 400
 
-    file = request.files['image']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
+    # Get the image file
+    image_file = request.files['image']
+    save_path = os.path.join(UPLOAD_FOLDER, 'original.png')
+    image_file.save(save_path)
 
-    if file:
+    # Print debug information
+    print('Image saved to:', save_path)
+
+    # Return the path to the saved image
+    return jsonify({'image_path': save_path})
+
+@app.route('/api/card', methods=['POST'])
+def receive_card_id():
+    data = request.get_json()
+    card_id = data.get('cardId')
+    print('Received card ID:', card_id)
+
+    if card_id == 1:
         try:
-            # Read the uploaded image
-            img = Image.open(io.BytesIO(file.read()))
+            image_path = os.path.join(UPLOAD_FOLDER, 'original.png')
+            image = Image.open(image_path)
 
-            # Convert image to black and white
-            bw_img = img.convert('L')
+            bw_image = BlackAndWhiteFilter(image)
 
-            # Ensure the existence of the upload directory
-            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+            save_path = os.path.join(UPLOAD_FOLDER, 'bw.png')
+            bw_image.save(save_path, format='PNG')
 
-            # Generate a unique filename
-            filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            print('Image filtered and saved:', save_path)
 
-            # Ensure file extension
-            filename = ensure_extension(filename)
-
-            # Save the black and white image
-            bw_img.save(filename)
-
-            # Read the processed image back into memory
-            with open(filename, 'rb') as image_file:
-                encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
-
-            return jsonify({'message': 'File processed and saved successfully', 'filename': filename, 'encoded_image': encoded_string}), 200
+            return jsonify({'filtered_image_path': save_path})
         except Exception as e:
-            return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+            print('Error applying filter:', str(e))
+            return jsonify({'error': 'Error applying filter'}), 500
+    elif card_id == 2:
+        try:
+            image_path = os.path.join(UPLOAD_FOLDER, 'original.png')
+            image = Image.open(image_path)
 
-def ensure_extension(filename):
-    # Ensure the filename has the correct extension (e.g., .jpg, .png)
-    _, ext = os.path.splitext(filename)
-    if not ext:
-        filename += '.png'  # You can change the extension as needed
-    return filename
+            blurred_image = GaussianBlurFilter(image)
+
+            save_path = os.path.join(UPLOAD_FOLDER, 'gaussian.png')
+            blurred_image.save(save_path, format='PNG')
+
+            print('Image blurred and saved:', save_path)
+
+            return jsonify({'blurred_image_path': save_path})
+        except Exception as e:
+            print('Error applying Gaussian blur:', str(e))
+            return jsonify({'error': 'Error applying Gaussian blur'}), 500
+    else:
+        return jsonify({'message': 'No filtering needed for this card'})
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
