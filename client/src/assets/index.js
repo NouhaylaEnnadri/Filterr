@@ -4,5 +4,6 @@ import lola from "./lola.jpg";
 import book from "./book.png";
 import bwf from "./bwf.png";
 import gaussianF from "./gaussianF.png";
-
-export { filter, lala, lola, book, bwf, gaussianF };
+import originalF from "./originalF.png";
+import Fsepia from "./Fsepia.png";
+export { Fsepia, originalF, filter, lala, lola, book, bwf, gaussianF };
