@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { cardData } from '../constant';
-import { bw, gaussian, sepia ,original } from '../../../server/index';
+import { bw, gaussian, sepia ,original ,Bright,rotated, rotated_120,
+  rotated_180,
+  rotated_90,
+  rotated_360,} from '../../../server/index';
+import Button from './Button'; // Import the Button component
 
-const Pic = () => {
+const Pic = ({value,barValue,barTitle}) => {
   const [previewImage, setPreviewImage] = useState(null);
+  const [title, setTitle] = useState(""); // Initialize title state
+  const [degree, setDegree] = useState(0); // Initialize degree state
+  const [PbarTitle, setbarTitle] = useState(0); // Initialize degree state
+  const [PbarValue, setbarValue] = useState(0); // Initialize degree state
+
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -40,13 +49,12 @@ const Pic = () => {
 
       if (previewImage) {
         switch (card.id) {
-        
           case 1:
             setPreviewImage(original);
             break;
           case 2:
-                setPreviewImage(bw);
-                break;
+            setPreviewImage(bw);
+            break;
           case 3:
             setPreviewImage(gaussian);
             break;
@@ -64,6 +72,50 @@ const Pic = () => {
     window.location.reload();
   };
 
+ 
+  
+
+  useEffect(() => {
+    console.log("value" + value); 
+
+    if (previewImage && value) {
+        console.log("rotation" + value);
+        setTimeout(() => {
+            switch (value) {
+                case 90:
+                    setPreviewImage(rotated_90);
+                    break;
+                case 120:
+                    setPreviewImage(rotated_120);
+                    break;
+                case 180:
+                    setPreviewImage(rotated_180);
+                    break;
+                case 360:
+                    setPreviewImage(rotated_360);
+                    break;
+                default:
+                    break;
+            }
+        }, 1000); // Wait for 1 second (1000 milliseconds) before updating previewImage
+    }
+}, [value]);  // Include previewImage in the dependency array
+
+
+
+  useEffect(() => {
+    setbarTitle(barTitle); 
+    setbarValue(barValue); 
+    if(PbarTitle === "Bright"){
+      setPreviewImage(Bright);
+      }
+      console.log("pic"+barTitle);
+  },[barValue,barTitle])
+
+console.log(PbarTitle);
+console.log(PbarValue);
+
+  
   return (
     <div className="flex h-screen overflow-hidden">
       <div className="m-10 flex-1 mt-10 flex justify-center items-center">
@@ -112,6 +164,7 @@ const Pic = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

@@ -6,4 +6,6 @@ import bwf from "./bwf.png";
 import gaussianF from "./gaussianF.png";
 import originalF from "./originalF.png";
 import Fsepia from "./Fsepia.png";
-export { Fsepia, originalF, filter, lala, lola, book, bwf, gaussianF };
+import rotate from "./rotate.png";
+
+export { rotate, Fsepia, originalF, filter, lala, lola, book, bwf, gaussianF };

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { cardData } from '../constant';
-import Pic from './Pic';
 
 const Filtres = () => {
   const [clickedCard, setClickedCard] = useState(null);
@@ -27,7 +26,8 @@ const Filtres = () => {
           ))}
         </div>
       </div>
-      <Pic clickedCard={clickedCard} />
+    
+
     </div>
   );
 };
