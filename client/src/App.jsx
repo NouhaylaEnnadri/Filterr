@@ -1,35 +1,46 @@
 import React, { useState } from 'react';
-import { NavBar, Filters, Pic, Param } from "./components";
+import { NavBar, Filters, Param, Landing, Pic } from "./components";
 
 const App = () => {
+  const [value, setValue] = useState("");
+  const [barTitle, setBarTitle] = useState("");
+  const [barValue, setBarValue] = useState("");
+  const [showPic, setShowPic] = useState(false); // State to track whether to show the Pic component
 
-  const [value,setValue]=useState("");
-  const [barTitle,setbarTitle]=useState("");
-  const [barValue,setBarValue]=useState("");
-
-
-  const buttoncclicked = (degree)=>{
+  const buttonClicked = (degree) => {
     setValue(degree);
     console.log("clicked button");
   }
-  const filterChanged = (barTitle,barValue)=>{
-      setbarTitle(barTitle);
-      setBarValue(barValue);
 
-      console.log(" bar value changed");
-    }
+  const filterChanged = (barTitle, barValue) => {
+    setBarTitle(barTitle);
+    setBarValue(barValue);
+    console.log("bar value changed");
+  }
+
+  const handleButtonClick = () => {
+    setShowPic(true); // Set showPic to true to display the Pic component
+  }
 
   return (
-      <div className='overflow-hidden  h-screen ' >
-        <div className="flex">
-          <Param />
-          <NavBar btnonclick={buttoncclicked} barclick={filterChanged} />
-        <div className="flex-1  h-screen ">
-        <Pic  value={value} barTitle={barTitle} barValue={barValue} />
+    <>
+      {!showPic && (
+        <div className="overflow-hidden h-screen">
+          <div className="flex h-screen">
+            <Landing onClick={handleButtonClick} />
+          </div>
         </div>
-      </div>
-      </div>
-     
+      )}
+      {showPic && (
+        <div className="overflow-hidden h-screen">
+          <div className="flex h-screen">
+            <Param />
+            <NavBar btnonclick={buttonClicked} barclick={filterChanged} />
+            <Pic value={value} barTitle={barTitle} barValue={barValue} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
