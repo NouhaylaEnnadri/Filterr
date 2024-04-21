@@ -44,7 +44,7 @@ def update_value():
     global title  # Access the global title variable
     try:
         data = request.get_json()
-        value = int(data.get('value'))  # Convert value to integer
+        value = float(data.get('value'))  # Convert value to float
         title = data.get('title')  # Update the global title variable
 
         print(f'Received value: {value}')
@@ -56,10 +56,10 @@ def update_value():
 
         if title == "Bright":
             # Apply brightness adjustment
-            brightness_factor = value / 50.0  # Scale value to range between 0 and 2 (PIL brightness factor)
+            brightness_factor = value  # Use the value directly
             enhanced_image = ImageEnhance.Brightness(original_image).enhance(brightness_factor)
-            # Save the updated image
-            updated_image_path = os.path.join(UPLOAD_FOLDER, 'Bright.png')
+            # Save the updated image with degree in the filename
+            updated_image_path = os.path.join(UPLOAD_FOLDER, f'Bright_{int(value)}.png')
             enhanced_image.save(updated_image_path)
             return jsonify({'title': title, 'value': value}), 200
         else:
@@ -67,7 +67,6 @@ def update_value():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/api/process-image', methods=['POST'])
 def process_image_route():

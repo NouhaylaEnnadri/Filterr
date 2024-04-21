@@ -13,9 +13,21 @@ import vignette from "./uploads/vignette_filter.png";
 import warmth from "./uploads/warmth_filter.png";
 import lens from "./uploads/lens_flare_filter.png";
 import water from "./uploads/watercolor_filter.png";
+import Bright_0 from "./uploads/Bright_0.png";
+import Bright_1 from "./uploads/Bright_1.png";
+import Bright_2 from "./uploads/Bright_2.png";
+import Bright_3 from "./uploads/Bright_3.png";
+import Bright_4 from "./uploads/Bright_4.png";
+import Bright_5 from "./uploads/Bright_5.png";
 
 export {
   lens,
+  Bright_0,
+  Bright_1,
+  Bright_2,
+  Bright_3,
+  Bright_4,
+  Bright_5,
   water,
   bw,
   gaussian,
