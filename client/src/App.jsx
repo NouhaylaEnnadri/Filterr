@@ -25,11 +25,7 @@ const App = () => {
   return (
     <>
       {!showPic && (
-        <div className="overflow-hidden h-screen">
-          <div className="flex h-screen">
             <Landing onClick={handleButtonClick} />
-          </div>
-        </div>
       )}
       {showPic && (
         <div className="overflow-hidden h-screen">

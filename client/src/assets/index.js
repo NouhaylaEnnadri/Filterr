@@ -14,8 +14,10 @@ import vignette from "./vignette_filter.png";
 import warmth from "./warmth_filter.png";
 import water from "./watercolor_filter.png";
 import lens from "./lens_flare_filter.png";
+import hero from "./hero.png";
 
 export {
+  hero,
   lens,
   water,
   warmth,
