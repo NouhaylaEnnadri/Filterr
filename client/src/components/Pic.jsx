@@ -133,58 +133,78 @@ const Pic = ({ value, barValue, barTitle }) => {
   const handleRefresh = () => {
     setPreviewImage(null); // Reset previewImage state to null
   };
-
   useEffect(() => {
-    console.log("value" + value); 
-
     if (previewImage && value) {
       console.log("rotation" + value);
-      setTimeout(() => {
-        switch (value) {
-          case 90:
+      switch (value) {
+        case 90:
+          setTimeout(() => {
             setPreviewImage(rotated_90);
-            break;
-          case 120:
+          }, 1000);
+          break;
+        case 120:
+          setTimeout(() => {
             setPreviewImage(rotated_120);
-            break;
-          case 180:
+          }, 1000);
+          break;
+        case 180:
+          setTimeout(() => {
             setPreviewImage(rotated_180);
-            break;
-          case 360:
+          }, 1000);
+          break;
+        case 360:
+          setTimeout(() => {
             setPreviewImage(rotated_360);
-            break;
-          default:
-            break;
-        }
-      }, 1000); // Wait for 1 second (1000 milliseconds) before updating previewImage
+          }, 1000);
+          break;
+        default:
+          break;
+      }
     }
-  }, [value, previewImage]);
-
+  }, [value]);
+  
   useEffect(() => {
     setbarTitle(barTitle);
     setbarValue(barValue);
     console.log("pic" + barValue);
-
+  
     if (previewImage && barValue) {
-      if (barValue >= 0 && barValue < 1) {
-        setPreviewImage(Bright_0);
-      } else if (barValue >= 1 && barValue < 2) {
-        setPreviewImage(Bright_1);
-      } else if (barValue >= 2 && barValue < 3) {
-        setPreviewImage(Bright_2);
+      switch (true) {
+        case barValue >= 0 && barValue < 2:
+          setTimeout(() => {
+            setPreviewImage(prevImage => Bright_0);
+          }, 1000); // Wait for 1 second before setting the image
+          break;
+       
+        case barValue >= 4 && barValue < 6:
+          setTimeout(() => {
+            setPreviewImage(prevImage => Bright_2);
+          }, 1000); // Wait for 1 second before setting the image
+          break;
+        case barValue >= 6 && barValue < 8:
+          setTimeout(() => {
+            setPreviewImage(prevImage => Bright_3);
+          }, 1000); // Wait for 1 second before setting the image
+          break;
+        case barValue >= 8 && barValue < 10:
+          setTimeout(() => {
+            setPreviewImage(prevImage => Bright_4);
+          }, 1000); // Wait for 1 second before setting the image
+          break;
+          case barValue >= 10 :
+            setTimeout(() => {
+              setPreviewImage(prevImage => Bright_5);
+            }, 1000); // Wait for 1 second before setting the image
+            break;
+        default:
+          // Handle default case
+          break;
       }
-     else if (barValue >= 3 && barValue < 4) {
-      setPreviewImage(Bright_3);
-
-    }
-   else if (barValue >= 4 && barValue < 5) {
-    setPreviewImage(Bright_4);
-  }
-
     }
   
     console.log("pic" + barTitle);
-  }, [barValue, barTitle,previewImage]);
+  }, [barValue, barTitle]);
+
   
   
   return (
