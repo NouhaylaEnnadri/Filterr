@@ -1,4 +1,19 @@
-import { lala, lola, book, bwf, gaussianF, originalF, Fsepia } from "../assets";
+import {
+  lala,
+  lola,
+  book,
+  bwf,
+  gaussianF,
+  originalF,
+  Fsepia,
+  sharp,
+  contrast,
+  staruration,
+  vignette,
+  warmth,
+  water,
+  lens,
+} from "../assets";
 export const cardData = [
   {
     id: 1,
@@ -27,20 +42,45 @@ export const cardData = [
   },
   {
     id: 5,
-    title: "Sdpia",
-    description: "Apply sepia tone filter",
-    imgUrl: lola, // Sepia filter image
+    title: "Sharpen",
+    description: "Apply Sharpen Filter",
+    imgUrl: sharp, // Sepia filter image
   },
   {
     id: 6,
-    title: "Sdpia",
-    description: "Apply sepia tone filter",
-    imgUrl: lola, // Sepia filter image
+    title: "reverse saturation ",
+    description: " Apply reverse saturation filter ",
+    imgUrl: staruration, // Sepia filter image
   },
   {
     id: 7,
-    title: "Sdpia",
-    description: "Apply sepia tone filter",
-    imgUrl: lola, // Sepia filter image
+    title: "contrast filter",
+    description: "Apply contrast filter ",
+    imgUrl: contrast, // Sepia filter image
+  },
+  {
+    id: 8,
+    title: "vignette filter",
+    description: "Apply vignette filter",
+    imgUrl: vignette, // Sepia filter image
+  },
+  {
+    id: 9,
+    title: "warmth filter",
+    description: "Apply warmth filter",
+    imgUrl: warmth, // Sepia filter image
+  },
+  {
+    id: 10,
+    title: "watercolor filter",
+    description: "Apply watercolor filter",
+    imgUrl: water, // Sepia filter image
+  },
+
+  {
+    id: 11,
+    title: "lens falre filter",
+    description: "lens falre filter",
+    imgUrl: lens, // Sepia filter image
   },
 ];

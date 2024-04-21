@@ -1,0 +1,7 @@
+commandes : 
+
+1st terminal : 
+cd client  -> npm run dev 
+
+2end terminal : 
+cd server -> python main.py

@@ -1,40 +1,10 @@
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from filtres import black_and_white_filter, gaussian_blur_filter, sepia_filter
-from PIL import Image, ImageFilter, ImageEnhance
-
-app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
-
-UPLOAD_FOLDER = 'uploads'
-
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-@app.route('/api/update-degree', methods=['POST'])
-def update_degree():
-    global degree
-    try:
-        data = request.get_json()
-        new_degree = int(data.get('degree'))  # Convert degree to integer
-        degree = new_degree  # Update the global degree variable
-
-        print(f'Received degree: {degree}')
-        
-        # Rotate the existing image based on the updated degree
-        rotated_image_path = rotate_image(os.path.join(UPLOAD_FOLDER, 'original.png'), degree)
-        
-        return jsonify({'image_path': rotated_image_path, 'message': 'Image rotated successfully', 'degree': degree}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-# Rotate the image by the specified degree
-import os
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from filtres import black_and_white_filter, gaussian_blur_filter, sepia_filter
-from PIL import Image, ImageFilter, ImageEnhance
+from PIL import Image, ImageFilter, ImageEnhance, ImageDraw
+from filtres import (black_and_white_filter, oil_painting_filter, watercolor_filter, contrast_filter,
+                      gaussian_blur_filter, lens_flare_filter, saturation_filter,
+                      sepia_filter, sharpen_filter, vignette_filter, warmth_filter)
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -99,7 +69,6 @@ def update_value():
         return jsonify({'error': str(e)}), 500
 
 
-    
 @app.route('/api/process-image', methods=['POST'])
 def process_image_route():
     if 'image' not in request.files:
@@ -120,6 +89,10 @@ def receive_card_id():
         image_path = os.path.join(UPLOAD_FOLDER, 'original.png')
         image = Image.open(image_path)
 
+        filtered_image = None
+        save_path = None
+        message = None
+
         if card_id == 2:
             filtered_image = black_and_white_filter(image)
             save_path = os.path.join(UPLOAD_FOLDER, 'bw.png')
@@ -132,16 +105,48 @@ def receive_card_id():
             filtered_image = sepia_filter(image)
             save_path = os.path.join(UPLOAD_FOLDER, 'sepia.png')
             message = 'Sepia filter applied.'
-       
-
-
+        elif card_id == 5:
+            filtered_image = sharpen_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'sharp.png')
+            message = 'Sharpen filter applied.'
+        elif card_id == 6:
+            filtered_image = saturation_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'saturation_filter.png')
+            message = 'Edge enhancement filter applied.'
+        elif card_id == 7:
+            filtered_image = contrast_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'contrast_filter.png')
+            message = 'Contour filter applied.'
+        elif card_id == 8:
+            filtered_image = vignette_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'vignette_filter.png')
+            message = 'Motion blur filter applied.'
+        elif card_id == 9:
+            filtered_image = warmth_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'warmth_filter.png')
+            message = 'Invert colors filter applied.'
+        elif card_id == 10:
+            filtered_image = watercolor_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'watercolor_filter.png')
+            message = 'Invert colors filter applied.'
+        elif card_id == 11:
+            filtered_image = lens_flare_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'lens_flare_filter.png')
+            message = 'Invert colors filter applied.'
+        elif card_id == 12:
+            filtered_image = oil_painting_filter(image)
+            save_path = os.path.join(UPLOAD_FOLDER, 'oil_painting_filter.png')
+            message = 'Invert colors filter applied.'
         else:
             return jsonify({'error': 'Invalid card ID'}), 400
 
-        filtered_image.save(save_path, format='PNG')
-        print('Image filtered and saved:', save_path)
-        return jsonify({'filtered_image_path': save_path, 'message': message})
-    
+        if filtered_image:
+            filtered_image.save(save_path, format='PNG')
+            print('Image filtered and saved:', save_path)
+            return jsonify({'filtered_image_path': save_path, 'message': message})
+
+        return jsonify({'error': 'Error applying filter'}), 500
+
     except Exception as e:
         print('Error applying filter:', str(e))
         return jsonify({'error': 'Error applying filter'}), 500
