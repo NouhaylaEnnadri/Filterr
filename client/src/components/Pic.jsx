@@ -10,7 +10,7 @@ import { bw, gaussian, sepia ,original , rotated_120,
   contrast,
   vignette,
   warmth,
-  lens, water,Bright_0,Bright_1,Bright_2,Bright_3,Bright_4,Bright_5} from '../../../server/index';
+  lens, water,Bright_0,Bright_1,Bright_2,Bright_3,Bright_4,Bright_5, Hue_0, Hue_1, Hue_3, Hue_2, Hue_4} from '../../../server/index';
 
 const ImageSection = ({ previewImage, handleFileChange, handleRefresh }) => (
   <div className="m-10 flex-1 mt-10 flex justify-center items-center">
@@ -202,6 +202,40 @@ const Pic = ({ value, barValue, barTitle }) => {
           break;
       }
     }}
+    if(barTitle === "barHue"){
+      if (previewImage && barValue ) {
+        switch (true) {
+          case barValue >= 0 && barValue < 2:
+            setTimeout(() => {
+              setPreviewImage(prevImage => Hue_0);
+            }, 1000); // Wait for 1 second before setting the image
+            break;
+    
+          case barValue >= 4 && barValue < 6:
+            setTimeout(() => {
+              setPreviewImage(prevImage => Hue_1);
+            }, 1000); // Wait for 1 second before setting the image
+            break;
+          case barValue >= 6 && barValue < 8:
+            setTimeout(() => {
+              setPreviewImage(prevImage => Hue_2);
+            }, 1000); // Wait for 1 second before setting the image
+            break;
+          case barValue >= 8 && barValue < 10:
+            setTimeout(() => {
+              setPreviewImage(prevImage => Hue_3);
+            }, 1000); // Wait for 1 second before setting the image
+            break;
+          case barValue >= 10:
+            setTimeout(() => {
+              setPreviewImage(prevImage => Hue_4);
+            }, 1000); // Wait for 1 second before setting the image
+            break;
+          default:
+            // Handle default case
+            break;
+        }
+      }}
   
     console.log("pic" + barTitle);
   }, [barValue, barTitle]);

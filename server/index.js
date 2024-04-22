@@ -19,8 +19,20 @@ import Bright_2 from "./uploads/Bright_2.png";
 import Bright_3 from "./uploads/Bright_3.png";
 import Bright_4 from "./uploads/Bright_4.png";
 import Bright_5 from "./uploads/Bright_5.png";
+import Hue_0 from "./uploads/Hue_0.png";
+import Hue_1 from "./uploads/Hue_1.png";
+import Hue_2 from "./uploads/Hue_2.png";
+import Hue_3 from "./uploads/Hue_3.png";
+import Hue_4 from "./uploads/Hue_4.png";
+import Hue_5 from "./uploads/Hue_5.png";
 
 export {
+  Hue_0,
+  Hue_1,
+  Hue_2,
+  Hue_3,
+  Hue_4,
+  Hue_5,
   lens,
   Bright_0,
   Bright_1,
