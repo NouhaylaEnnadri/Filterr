@@ -39,6 +39,16 @@ def rotate_image(image_path, degree):
     rotated_image.save(rotated_image_path)
     return rotated_image_path
 
+from PIL import Image, ImageEnhance
+import os
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+UPLOAD_FOLDER = 'uploads'  # Assuming you have a folder named 'uploads' to store images
+
+from PIL import ImageEnhance, Image
+import os
+
 @app.route('/api/update-value', methods=['POST'])
 def update_value():
     global title  # Access the global title variable
@@ -61,12 +71,30 @@ def update_value():
             # Save the updated image with degree in the filename
             updated_image_path = os.path.join(UPLOAD_FOLDER, f'Bright_{int(value)}.png')
             enhanced_image.save(updated_image_path)
-            return jsonify({'title': title, 'value': value}), 200
+        elif title == "Hue":
+            # Calculate the hue adjustment factor based on the value
+            if 0 <= value < 3:
+                hue_factor = -5 # Increase blue
+            elif 3 <= value < 6:
+                hue_factor = 10  # Increase red
+            elif 6 <= value < 9:
+                hue_factor = 20  # Increase green
+          
+            # Apply hue adjustment
+            enhanced_image = ImageEnhance.Color(original_image).enhance(hue_factor)
+            # Save the updated image with degree in the filename
+            updated_image_path = os.path.join(UPLOAD_FOLDER, f'Hue_{int(value)}.png')
+            enhanced_image.save(updated_image_path)
         else:
-            return jsonify({'title': title, 'value': value}), 200
+            return jsonify({'error': 'Invalid title'}), 400
+
+        return jsonify({'title': title, 'value': value}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+
 
 @app.route('/api/process-image', methods=['POST'])
 def process_image_route():

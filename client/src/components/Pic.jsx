@@ -166,16 +166,17 @@ const Pic = ({ value, barValue, barTitle }) => {
   useEffect(() => {
     setbarTitle(barTitle);
     setbarValue(barValue);
-    console.log("pic" + barValue);
+    console.log( "."+barTitle);
   
-    if (previewImage && barValue) {
+    if(barTitle === "barBright"){
+    if (previewImage && barValue ) {
       switch (true) {
         case barValue >= 0 && barValue < 2:
           setTimeout(() => {
             setPreviewImage(prevImage => Bright_0);
           }, 1000); // Wait for 1 second before setting the image
           break;
-       
+  
         case barValue >= 4 && barValue < 6:
           setTimeout(() => {
             setPreviewImage(prevImage => Bright_2);
@@ -191,20 +192,19 @@ const Pic = ({ value, barValue, barTitle }) => {
             setPreviewImage(prevImage => Bright_4);
           }, 1000); // Wait for 1 second before setting the image
           break;
-          case barValue >= 10 :
-            setTimeout(() => {
-              setPreviewImage(prevImage => Bright_5);
-            }, 1000); // Wait for 1 second before setting the image
-            break;
+        case barValue >= 10:
+          setTimeout(() => {
+            setPreviewImage(prevImage => Bright_5);
+          }, 1000); // Wait for 1 second before setting the image
+          break;
         default:
           // Handle default case
           break;
       }
-    }
+    }}
   
     console.log("pic" + barTitle);
   }, [barValue, barTitle]);
-
   
   
   return (
