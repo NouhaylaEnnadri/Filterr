@@ -176,6 +176,11 @@ const Pic = ({ value, barValue, barTitle }) => {
             setPreviewImage(prevImage => Bright_0);
           }, 1000); // Wait for 1 second before setting the image
           break;
+          case barValue >= 2 && barValue < 4:
+            setTimeout(() => {
+              setPreviewImage(prevImage => Bright_0);
+            }, 1000); // Wait for 1 second before setting the image
+            break;
   
         case barValue >= 4 && barValue < 6:
           setTimeout(() => {
@@ -210,6 +215,11 @@ const Pic = ({ value, barValue, barTitle }) => {
               setPreviewImage(prevImage => Hue_0);
             }, 1000); // Wait for 1 second before setting the image
             break;
+            case barValue >= 2 && barValue < 4:
+              setTimeout(() => {
+                setPreviewImage(prevImage => Hue_0);
+              }, 1000); // Wait for 1 second before setting the image
+              break;
     
           case barValue >= 4 && barValue < 6:
             setTimeout(() => {
