@@ -10,7 +10,7 @@ import { bw, gaussian, sepia ,original , rotated_120,
   contrast,
   vignette,
   warmth,
-  lens, water,Bright_0,Bright_1,Bright_2,Bright_3,Bright_4,Bright_5, Hue_0, Hue_1, Hue_3, Hue_2, Hue_4} from '../../../server/index';
+  lens, water,Bright_0,Bright_1,Bright_2,Bright_3,Bright_4,Bright_5, Hue_0, Hue_1, Hue_3, Hue_2, Hue_4,Hue_5} from '../../../server/index';
 
 const ImageSection = ({ previewImage, handleFileChange, handleRefresh }) => (
   <div className="m-10 flex-1 mt-10 flex justify-center items-center">
@@ -140,22 +140,22 @@ const Pic = ({ value, barValue, barTitle }) => {
         case 90:
           setTimeout(() => {
             setPreviewImage(rotated_90);
-          }, 1000);
+          }, 2000);
           break;
         case 120:
           setTimeout(() => {
             setPreviewImage(rotated_120);
-          }, 1000);
+          }, 2000);
           break;
         case 180:
           setTimeout(() => {
             setPreviewImage(rotated_180);
-          }, 1000);
+          }, 2000);
           break;
         case 360:
           setTimeout(() => {
             setPreviewImage(rotated_360);
-          }, 1000);
+          }, 2000);
           break;
         default:
           break;
@@ -174,33 +174,33 @@ const Pic = ({ value, barValue, barTitle }) => {
         case barValue >= 0 && barValue < 2:
           setTimeout(() => {
             setPreviewImage(prevImage => Bright_0);
-          }, 1000); // Wait for 1 second before setting the image
+          }, 2000); // Wait for 1 second before setting the image
           break;
           case barValue >= 2 && barValue < 4:
             setTimeout(() => {
               setPreviewImage(prevImage => Bright_0);
-            }, 1000); // Wait for 1 second before setting the image
+            }, 2000); // Wait for 1 second before setting the image
             break;
   
         case barValue >= 4 && barValue < 6:
           setTimeout(() => {
             setPreviewImage(prevImage => Bright_2);
-          }, 1000); // Wait for 1 second before setting the image
+          }, 2000); // Wait for 1 second before setting the image
           break;
         case barValue >= 6 && barValue < 8:
           setTimeout(() => {
             setPreviewImage(prevImage => Bright_3);
-          }, 1000); // Wait for 1 second before setting the image
+          }, 2000); // Wait for 1 second before setting the image
           break;
         case barValue >= 8 && barValue < 10:
           setTimeout(() => {
             setPreviewImage(prevImage => Bright_4);
-          }, 1000); // Wait for 1 second before setting the image
+          }, 2000); // Wait for 1 second before setting the image
           break;
         case barValue >= 10:
           setTimeout(() => {
             setPreviewImage(prevImage => Bright_5);
-          }, 1000); // Wait for 1 second before setting the image
+          }, 2000); // Wait for 1 second before setting the image
           break;
         default:
           // Handle default case
@@ -213,33 +213,33 @@ const Pic = ({ value, barValue, barTitle }) => {
           case barValue >= 0 && barValue < 2:
             setTimeout(() => {
               setPreviewImage(prevImage => Hue_0);
-            }, 1000); // Wait for 1 second before setting the image
+            }, 2000); // Wait for 1 second before setting the image
             break;
             case barValue >= 2 && barValue < 4:
               setTimeout(() => {
-                setPreviewImage(prevImage => Hue_0);
-              }, 1000); // Wait for 1 second before setting the image
+                setPreviewImage(prevImage => Hue_1);
+              }, 2000); // Wait for 1 second before setting the image
               break;
     
           case barValue >= 4 && barValue < 6:
             setTimeout(() => {
-              setPreviewImage(prevImage => Hue_1);
-            }, 1000); // Wait for 1 second before setting the image
+              setPreviewImage(prevImage => Hue_2);
+            }, 2000); // Wait for 1 second before setting the image
             break;
           case barValue >= 6 && barValue < 8:
             setTimeout(() => {
-              setPreviewImage(prevImage => Hue_2);
-            }, 1000); // Wait for 1 second before setting the image
+              setPreviewImage(prevImage => Hue_3);
+            }, 2000); // Wait for 1 second before setting the image
             break;
           case barValue >= 8 && barValue < 10:
             setTimeout(() => {
-              setPreviewImage(prevImage => Hue_3);
-            }, 1000); // Wait for 1 second before setting the image
+              setPreviewImage(prevImage => Hue_4);
+            }, 2000); // Wait for 1 second before setting the image
             break;
           case barValue >= 10:
             setTimeout(() => {
-              setPreviewImage(prevImage => Hue_4);
-            }, 1000); // Wait for 1 second before setting the image
+              setPreviewImage(prevImage => Hue_5);
+            }, 2000); // Wait for 1 second before setting the image
             break;
           default:
             // Handle default case
