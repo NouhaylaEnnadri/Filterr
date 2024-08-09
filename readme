@@ -1,1 +1,39 @@
+# Filterr
+
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+
+Filterr is a versatile application designed to provide dynamic filtering capabilities and integrate seamlessly with both front-end and back-end technologies. It uses React for the user interface, Tailwind CSS for styling, and Flask as the back-end framework.
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- **Dynamic Filtering**: Advanced filtering options for various data sets.
+- **Search Functionality**: Powerful search capabilities integrated with filtering.
+- **Responsive Design**: Modern and user-friendly interface using Tailwind CSS.
+- **Flask Integration**: Back-end support with Flask to handle API requests and data processing.
+- **Easy Integration**: Simple setup for integrating into existing projects.
+
+## Technologies Used
+
+- **React**: The core library for building the user interface.
+- **JavaScript**: Language used for application logic.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+- **Flask**: Lightweight Python web framework for building the back-end API.
+
+## Project Structure
+
+The project is organized to facilitate easy development and scalability:
 
