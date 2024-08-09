@@ -45,15 +45,14 @@ picture editing tool that lets you add filters and effects to your images.    <b
 
 <img width="655" alt="image" src="https://github.com/user-attachments/assets/2a32193e-e808-4d83-ad6b-ada304ae33b8">
 
+
 Filterr is a picture editing tool designed to enhance  images by adding various filters and effects. Built with React for a responsive front end, Flask for the backend, and Tailwind CSS for styling, it provides a sleek and modern user experience.
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### Built With
 
-* [![React][React.js]][React-url]
-* [![Flask][Flask]][Flask-url]
-* [![Tailwind CSS][TailwindCSS]][TailwindCSS-url]
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+* [React](https://reactjs.org/)
+* [Flask](https://flask.palletsprojects.com/)
+* [Tailwind CSS](https://tailwindcss.com/)
